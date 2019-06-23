@@ -7,7 +7,22 @@ describe Api::V1::SystemsController do
       it 'says no'
     end
 
-    describe 'while authenticated' do
+    describe 'Content-Type' do
+      it 'requires application/json' do
+
+        get :index
+        expect(response.status).to eq(400)
+        expect(response.body).to eq('Content-Type must be application/json')
+
+        @request.headers['Content-Type'] = 'application/json'
+        get :index
+        expect(response).to be_ok
+      end
+    end
+
+    describe 'while sending correct request' do
+      setup_api_environment_for_testing
+
       let(:system1) { FactoryBot.build(:system, radians_around_galactic_core: 1.0) }
       let(:system2) { FactoryBot.build(:system, radians_around_galactic_core: 3.0) }
       let(:system3) { FactoryBot.build(:system, radians_around_galactic_core: 2.0) }
