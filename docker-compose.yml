@@ -7,6 +7,7 @@ services:
     ports:
       - "5432:5432"
   web:
+    image: web
     build: .
     command: bundle exec rails s -p 3001 -b '0.0.0.0'
     volumes:
@@ -15,3 +16,11 @@ services:
       - "3001:3001"
     depends_on:
       - db
+      - clearweb
+  clearweb:
+    image: web
+    build: .
+    command: rm -rf /expanse-api/tmp/pids/server.pid
+    volumes:
+      - .:/expanse-api
+

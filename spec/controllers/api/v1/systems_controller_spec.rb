@@ -13,10 +13,6 @@ describe Api::V1::SystemsController do
         get :index
         expect(response.status).to eq(400)
         expect(response.body).to eq('Content-Type must be application/json')
-
-        @request.headers['Content-Type'] = 'application/json'
-        get :index
-        expect(response).to be_ok
       end
     end
 

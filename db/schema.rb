@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_212802) do
+ActiveRecord::Schema.define(version: 2019_06_24_013603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2019_06_23_212802) do
     t.string "name"
     t.integer "distance_from_galactic_core", default: 0, null: false
     t.float "radians_around_galactic_core", default: 0.0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "google_oauth_token"
+    t.string "google_oauth_refresh_token"
+    t.datetime "google_oauth_expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

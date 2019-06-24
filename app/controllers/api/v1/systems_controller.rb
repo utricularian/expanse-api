@@ -3,6 +3,7 @@ module Api
   module V1
     class SystemsController < ApplicationController
       before_action :require_application_json!
+      before_action :authenticate
 
       def index
         render json: {data: System.all.order(:radians_around_galactic_core)}

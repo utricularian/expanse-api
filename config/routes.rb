@@ -3,6 +3,13 @@ Rails.application.routes.draw do
 
   root 'home#index', controller: :home
 
+  get 'auth/google_oauth2/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'login', to: redirect('/auth/google_oauth2'), as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  resource :session, only: [:create, :destroy]
+
   namespace :api do
     namespace :v1 do
       resources :systems, only: :index
