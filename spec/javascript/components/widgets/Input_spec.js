@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as TestUtils from 'react-dom/test-utils';
 
-import Input from '../../../../app/javascript/components/widgets/Input';
+import Input from 'components/widgets/Input';
 
 import DOM from '../../testHelpers/dom';
 

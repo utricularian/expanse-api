@@ -2,7 +2,9 @@
   "name": "expanse-api",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "yarn run test:watch",
+    "test:watch": "jest --watchAll",
+    "test:ci": "jest"
   },
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
@@ -18,7 +20,12 @@
     "webpack-dev-server": "^3.7.2"
   },
   "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ],
     "roots": [
+      "app/javascript",
       "spec/javascript"
     ],
     "testMatch": [
