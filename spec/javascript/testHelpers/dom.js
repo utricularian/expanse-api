@@ -13,11 +13,11 @@ const simulateEvent = (componentOrElement, eventType, eventData) => {
 };
 
 const findTag = (componentOrElement, tag) => {
-  return TestUtils.findRenderedDOMComponentWithTag(componentOrElement, tag)
+  return TestUtils.findRenderedDOMComponentWithTag(componentOrElement, tag);
 };
 
 const clickTag = (componentOrElement, tag) => {
-  simulateEvent(findTag(componentOrElement, tag), "click");
+  simulateEvent(findTag(componentOrElement, tag), 'click');
 };
 
 export default {

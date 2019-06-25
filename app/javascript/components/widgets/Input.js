@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {value: this.props.value};
+    this.state = { value: this.props.value };
   }
 
   handleChange = (event) => {
     const changedValue = event.target.value;
-    this.setState({value: changedValue});
+    this.setState({ value: changedValue });
     this.props.changeCallback(changedValue);
   };
 
@@ -21,10 +22,21 @@ export default class Input extends React.Component {
 
   render() {
     return (
-      <label>
+      <div>
         {this.props.label}
-        <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}/>
-      </label>
+        <input type='text' value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
+      </div>
     );
   }
 }
+
+Input.defaultProps = {
+  value: ''
+};
+
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  changeCallback: PropTypes.func.isRequired,
+  submitCallback: PropTypes.func.isRequired,
+  value: PropTypes.string
+};
