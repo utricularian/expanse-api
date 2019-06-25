@@ -7,7 +7,7 @@ RUN apt-get update -qq && \
     libpq-dev \
     libssl-dev
 
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -18,16 +18,16 @@ RUN mkdir /expanse-api
 
 WORKDIR /expanse-api
 
-COPY package.json /expanse-api/package.json
-
-COPY yarn.lock /expanse-api/yarn.lock
-
-RUN yarn install
-
 COPY Gemfile /expanse-api/Gemfile
 
 COPY Gemfile.lock /expanse-api/Gemfile.lock
 
+COPY package.json /expanse-api/package.json
+
+COPY yarn.lock /expanse-api/yarn.lock
+
 RUN bundle install
+
+RUN NODE_ENV=development yarn install --check-files
 
 COPY . /expanse-api

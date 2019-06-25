@@ -9,20 +9,24 @@ services:
   web:
     image: web
     build: .
-    command: bundle exec rails s -p 3001 -b '0.0.0.0'
-    environment:
-      NODE_ENV: 'development'
+    command: ./bin/scripts/docker.rails_start.sh
+    env_file:
+      - '.env.docker'
     volumes:
       - .:/expanse-api
     ports:
-      - "3001:3001"
+      - "3000:3000"
     depends_on:
       - db
-      - clearweb
-  clearweb:
+      - webpacker
+  webpacker:
     image: web
     build: .
-    command: rm -rf /expanse-api/tmp/pids/server.pid
+    env_file:
+      - '.env.docker'
+    command: ./bin/scripts/docker.webpack-dev-server.sh
     volumes:
       - .:/expanse-api
+    ports:
+      - '3035:3035'
 

@@ -58,4 +58,12 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Shamelessly stolen from
+  # https://stackoverflow.com/questions/29417328/how-to-disable-cannot-render-console-from-on-rails
+  if File.file?('/.dockerenv')
+    config.web_console.whitelisted_ips = Socket.ip_address_list.reduce([]) do |res, addrinfo|
+      addrinfo.ipv4? ? res << IPAddr.new(addrinfo.ip_address).mask(24) : res
+    end
+  end
 end
