@@ -45,21 +45,4 @@ describe('Input', () => {
 
     expect(submitCallback).toHaveBeenCalledTimes(1);
   });
-
-  describe('when there is no submitCallback', () => {
-    beforeEach(() => {
-      input = TestUtils.renderIntoDocument(
-        <Input label='Hello World' value='something old' changeCallback={changeCallback} />
-      );
-      inputDOMElement = DOM.findTag(input, 'input');
-    });
-
-    it('does nothing (and does not break)', () => {
-      expect(submitCallback).toHaveBeenCalledTimes(0);
-
-      DOM.simulateEvent(inputDOMElement, 'keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-
-      expect(submitCallback).toHaveBeenCalledTimes(0);
-    });
-  });
 });

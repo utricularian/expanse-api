@@ -15,7 +15,7 @@ export default class Input extends React.Component {
   };
 
   handleKeyDown = (event) => {
-    if (this.props.submitCallback && (event.key === 'Enter' || event.keyCode === 13 || event.which === 13)) {
+    if (event.key === 'Enter' || event.keyCode === 13 || event.which === 13) {
       this.props.submitCallback();
     }
   };

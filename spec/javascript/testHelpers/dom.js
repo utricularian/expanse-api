@@ -12,6 +12,10 @@ const simulateEvent = (componentOrElement, eventType, eventData) => {
   }
 };
 
+const findAllTags = (componentOrElement, tag) => {
+  return TestUtils.scryRenderedDOMComponentsWithTag(componentOrElement, tag);
+};
+
 const findTag = (componentOrElement, tag) => {
   return TestUtils.findRenderedDOMComponentWithTag(componentOrElement, tag);
 };
@@ -22,6 +26,7 @@ const clickTag = (componentOrElement, tag) => {
 
 export default {
   findTag,
+  findAllTags,
   clickTag,
   simulateEvent
 };

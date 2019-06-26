@@ -1,0 +1,67 @@
+import React from 'react';
+import * as TestUtils from 'react-dom/test-utils';
+
+import Home from 'components/Home/Home';
+
+import MockSystemsStore from '../../mocks/stores/MockSystemsStore';
+import DOM from '../../testHelpers/dom';
+
+describe('Home', () => {
+  let home, homeDiv, systemsStore, systemObjectsStore, loginCallback;
+
+  beforeEach(() => {
+    systemsStore = new MockSystemsStore();
+    systemObjectsStore = {};
+    loginCallback = jest.fn();
+
+    home = TestUtils.renderIntoDocument(
+      <Home
+        systemsStore={systemsStore}
+        systemObjectsStore={systemObjectsStore}
+        loginCallback={loginCallback}
+      />
+    );
+    homeDiv = DOM.findAllTags(home, 'div')[0];
+  });
+
+  it('initializes with a rendered GlobalStats', () => {
+    expect(homeDiv.textContent).toMatch(/Global Stats/);
+    expect(homeDiv.textContent).not.toMatch(/Username:/);
+  });
+
+  describe('after closing Global Stats', () => {
+    beforeEach(() => {
+      DOM.clickTag(home, 'button');
+      homeDiv = DOM.findAllTags(home, 'div')[0];
+    });
+
+    it('should no longer display Global Stats', () => {
+      expect(homeDiv.textContent).not.toMatch(/Global Stats/);
+    });
+
+    it('should prompt the user to enter their username', () => {
+      expect(homeDiv.textContent).toMatch(/Username:/);
+    });
+
+    describe('after submitting a username', () => {
+      const username = 'MyUsername';
+
+      beforeEach(() => {
+        expect(loginCallback).toHaveBeenCalledTimes(0);
+
+        const inputDOMElement = DOM.findTag(home, 'input');
+        DOM.simulateEvent(inputDOMElement, 'change', { target: { value: username } });
+
+        expect(home.state.username).toEqual(username);
+
+        DOM.simulateEvent(inputDOMElement, 'keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+      });
+
+      it('should call login callback with username', () => {
+        expect(loginCallback).toHaveBeenCalledTimes(1);
+
+        expect(loginCallback).toHaveBeenCalledWith(username);
+      });
+    });
+  });
+});
