@@ -43,7 +43,13 @@ module.exports = function(api) {
         }
       ]
     ].filter(Boolean),
-    plugins: [
+    plugins:  [
+      [
+        require('@babel/plugin-proposal-decorators').default,
+        {
+          legacy: true
+        }
+      ],
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),

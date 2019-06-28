@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
+@observer
 export default class GlobalStats extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { numSystems: 0 };
-  }
-
   async componentDidMount() {
-    const systems = await this.props.systemsStore.findAll();
-    this.setState({ numSystems: systems.length });
+    this.props.systemsStore.findAll();
   }
 
   render() {
@@ -20,7 +15,7 @@ export default class GlobalStats extends React.Component {
         <button type='button' onClick={this.props.closeCallback}>Close</button>
         <div>
           <span>Number of Systems: </span>
-          <span>{this.state.numSystems}</span>
+          <span>{this.props.systemsStore.systems.length}</span>
         </div>
       </div>
     );
