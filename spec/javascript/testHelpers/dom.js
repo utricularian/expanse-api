@@ -1,5 +1,5 @@
-
 import * as TestUtils from 'react-dom/test-utils';
+import * as ReactDOM from 'react-dom';
 
 
 const simulateEvent = (componentOrElement, eventType, eventData) => {
@@ -24,9 +24,14 @@ const clickTag = (componentOrElement, tag) => {
   simulateEvent(findTag(componentOrElement, tag), 'click');
 };
 
+const findRenderedNodeForComponent = (componentOrElement) => {
+  return ReactDOM.findDOMNode(componentOrElement); // eslint-disable-line react/no-find-dom-node
+};
+
 export default {
-  findTag,
-  findAllTags,
   clickTag,
+  findAllTags,
+  findRenderedNodeForComponent,
+  findTag,
   simulateEvent
 };

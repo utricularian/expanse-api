@@ -23,6 +23,9 @@ export default class GlobalStats extends React.Component {
 }
 
 GlobalStats.propTypes = {
-  systemsStore: PropTypes.shape({ findAll: PropTypes.func }).isRequired,
+  systemsStore: PropTypes.shape({
+    findAll: PropTypes.func,
+    systems: PropTypes.array
+  }).isRequired,
   closeCallback: PropTypes.func.isRequired
 };

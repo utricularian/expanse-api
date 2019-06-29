@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_013603) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", null: false
     t.string "email", null: false
     t.string "google_oauth_token"
     t.string "google_oauth_refresh_token"

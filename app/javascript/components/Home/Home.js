@@ -11,10 +11,6 @@ export default class Home extends React.Component {
     this.state = { isGlobalStatsOpen: true, username: '' };
   }
 
-  handleFormSubmit = () => {
-    this.props.loginCallback(this.state.username);
-  };
-
   handleUsernameChange = (username) => {
     this.setState({ username });
   };
@@ -35,7 +31,7 @@ export default class Home extends React.Component {
     }
 
     return (
-      <Input label='Username:' value={this.state.username} changeCallback={this.handleUsernameChange} submitCallback={this.handleFormSubmit} />
+      <Input label='Username:' value={this.state.username} changeCallback={this.handleUsernameChange} />
     );
   }
 
@@ -51,6 +47,5 @@ export default class Home extends React.Component {
 
 Home.propTypes = {
   systemsStore: PropTypes.shape({ findAll: PropTypes.func }).isRequired,
-  systemObjectsStore: PropTypes.shape({}).isRequired,
-  loginCallback: PropTypes.func.isRequired
+  systemObjectsStore: PropTypes.shape({}).isRequired
 };

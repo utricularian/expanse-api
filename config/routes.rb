@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resource :current_user, only: [:show], controller: 'current_user'
+
       resources :systems, only: :index
     end
   end

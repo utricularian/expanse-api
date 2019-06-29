@@ -15,7 +15,7 @@ export default class Input extends React.Component {
   };
 
   handleKeyDown = (event) => {
-    if (event.key === 'Enter' || event.keyCode === 13 || event.which === 13) {
+    if (this.props.submitCallback && (event.key === 'Enter' || event.keyCode === 13 || event.which === 13)) {
       this.props.submitCallback();
     }
   };
@@ -31,12 +31,13 @@ export default class Input extends React.Component {
 }
 
 Input.defaultProps = {
-  value: ''
+  value: '',
+  submitCallback: undefined
 };
 
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   changeCallback: PropTypes.func.isRequired,
-  submitCallback: PropTypes.func.isRequired,
+  submitCallback: PropTypes.func,
   value: PropTypes.string
 };
