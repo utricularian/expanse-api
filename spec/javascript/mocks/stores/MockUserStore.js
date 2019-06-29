@@ -1,10 +1,14 @@
 import { observable } from 'mobx';
+import UserStore from 'stores/UserStore';
 
-export default class MockUserStore {
+export default class MockUserStore extends UserStore {
   @observable currentUser;
 
   constructor(propsParam) {
     const props = propsParam || {};
+
+    super(props);
+
     this._currentUser = props.currentUser;
     this._should401 = props.should401 || false;
   }

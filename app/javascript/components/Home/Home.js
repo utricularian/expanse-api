@@ -8,11 +8,11 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { isGlobalStatsOpen: true, username: '' };
+    this.state = { isGlobalStatsOpen: true };
   }
 
-  handleUsernameChange = (username) => {
-    this.setState({ username });
+  handleUsernameChange = () => {
+    // no op for now
   };
 
   handleCloseGlobalStats = () => {
@@ -31,7 +31,7 @@ export default class Home extends React.Component {
     }
 
     return (
-      <Input label='Username:' value={this.state.username} changeCallback={this.handleUsernameChange} />
+      <Input label='Username:' value={this.state.greeting} changeCallback={this.handleUsernameChange} />
     );
   }
 

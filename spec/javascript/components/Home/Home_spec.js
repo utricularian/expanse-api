@@ -42,26 +42,5 @@ describe('Home', () => {
     it('should prompt the user to enter their username', () => {
       expect(homeDiv.textContent).toMatch(/Username:/);
     });
-
-    describe('after submitting a username', () => {
-      const username = 'MyUsername';
-
-      beforeEach(() => {
-        expect(loginCallback).toHaveBeenCalledTimes(0);
-
-        const inputDOMElement = DOM.findTag(home, 'input');
-        DOM.simulateEvent(inputDOMElement, 'change', { target: { value: username } });
-
-        expect(home.state.username).toEqual(username);
-
-        DOM.simulateEvent(inputDOMElement, 'keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-      });
-
-      it('should call login callback with username', () => {
-        expect(loginCallback).toHaveBeenCalledTimes(1);
-
-        expect(loginCallback).toHaveBeenCalledWith(username);
-      });
-    });
   });
 });

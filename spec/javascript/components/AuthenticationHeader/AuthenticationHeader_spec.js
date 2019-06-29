@@ -37,8 +37,7 @@ describe('AuthenticationHeader', () => {
       const user = { name: 'Foobar Baz' };
       const mockUserStore = new MockUserStore({ currentUser: user });
 
-      const header = render(mockUserStore, loginRedirector);
-      await mockUserStore.fetchCurrentUserPromise();
+      const header = await render(mockUserStore, loginRedirector);
       const headerDiv = DOM.findRenderedNodeForComponent(header);
       expect(headerDiv.textContent).toMatch(/Foobar Baz/);
     });

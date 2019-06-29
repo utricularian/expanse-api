@@ -7,21 +7,21 @@ import Home from 'components/Home/Home';
 import AuthenticationHeader from 'components/AuthenticationHeader/AuthenticationHeader';
 
 import MockSystemsStore from '../mocks/stores/MockSystemsStore';
+import MockUserStore from '../mocks/stores/MockUserStore';
 
 jest.mock('components/Home/Home');
 jest.mock('components/AuthenticationHeader/AuthenticationHeader');
 
 describe('App', () => {
-  let systemsStore, systemObjectsStore, userStore, redirectFunc;
+  let systemsStore, systemObjectsStore, userStore, redirector, redirectFunc;
 
   beforeEach(() => {
     systemsStore = new MockSystemsStore();
     systemObjectsStore = {};
+    userStore = new MockUserStore();
     redirectFunc = jest.fn();
-    userStore = {
-      loginRedirector: {
-        redirect: redirectFunc
-      }
+    redirector = {
+      redirect: redirectFunc
     };
   });
 
@@ -37,6 +37,7 @@ describe('App', () => {
           systemsStore={aSystemStore}
           systemObjectsStore={aSystemObjectStore}
           userStore={aUserStore}
+          loginRedirector={redirector}
         />
       </MemoryRouter>
     );

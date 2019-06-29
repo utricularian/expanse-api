@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import { computed } from 'mobx';
 
 @observer
 export default class AuthenticationHeader extends React.Component {
@@ -14,22 +13,17 @@ export default class AuthenticationHeader extends React.Component {
     }
   }
 
-  @computed
-  get renderedName() {
-    const user = this.props.userStore.currentUser;
-    if (user) {
-      return `Hello ${user.name}`;
-    }
-
-    return 'Not Logged In';
+  get greeting() {
+    const currentUser = this.props.userStore.currentUser;
+    return currentUser ? `Hello ${currentUser.name}` : '';
   }
-
 
   render() {
     return (
-      <React.Fragment>
-        {this.renderedName}
-      </React.Fragment>
+      <ul>
+        <li>{this.greeting}</li>
+        <li><a href='/logout'>Logout</a></li>
+      </ul>
     );
   }
 }
